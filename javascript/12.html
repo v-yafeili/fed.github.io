@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>0.1+0.2 !=0.3 | NodeJs 技术进阶</title>
+    <meta name="generator" content="VuePress 1.5.2">
+    
+    <meta name="description" content="Just playing around">
+    <link rel="preload" href="/fed.github.io/assets/css/0.styles.054f3be8.css" as="style"><link rel="preload" href="/fed.github.io/assets/js/app.972fd7c1.js" as="script"><link rel="preload" href="/fed.github.io/assets/js/2.7f857163.js" as="script"><link rel="preload" href="/fed.github.io/assets/js/6.66116a90.js" as="script"><link rel="prefetch" href="/fed.github.io/assets/js/10.254b8dfa.js"><link rel="prefetch" href="/fed.github.io/assets/js/11.a74921d7.js"><link rel="prefetch" href="/fed.github.io/assets/js/3.ed7778fe.js"><link rel="prefetch" href="/fed.github.io/assets/js/4.41bbe006.js"><link rel="prefetch" href="/fed.github.io/assets/js/5.965bb66c.js"><link rel="prefetch" href="/fed.github.io/assets/js/7.971ffba0.js"><link rel="prefetch" href="/fed.github.io/assets/js/8.bd282692.js"><link rel="prefetch" href="/fed.github.io/assets/js/9.e94b2894.js">
+    <link rel="stylesheet" href="/fed.github.io/assets/css/0.styles.054f3be8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/fed.github.io/" class="home-link router-link-active"><!----> <span class="site-name">NodeJs 技术进阶</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>JavaScript</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/fed.github.io/javascript/call.html" class="sidebar-link">call,apply,bind,new 的实现原理</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/fed.github.io/javascript/call.html#call" class="sidebar-link">call</a></li><li class="sidebar-sub-header"><a href="/fed.github.io/javascript/call.html#apply" class="sidebar-link">apply</a></li><li class="sidebar-sub-header"><a href="/fed.github.io/javascript/call.html#bind" class="sidebar-link">bind</a></li><li class="sidebar-sub-header"><a href="/fed.github.io/javascript/call.html#new" class="sidebar-link">new</a></li></ul></li><li><a href="/fed.github.io/javascript/12.html" aria-current="page" class="active sidebar-link">0.1+0.2 !=0.3</a></li><li><a href="/fed.github.io/javascript/typeofinstanceof.html" class="sidebar-link">typeof &amp; instanceof 区别</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/fed.github.io/javascript/typeofinstanceof.html#typeof" class="sidebar-link">typeof</a></li><li class="sidebar-sub-header"><a href="/fed.github.io/javascript/typeofinstanceof.html#object-prototype-tostring" class="sidebar-link">Object.prototype.toString</a></li><li class="sidebar-sub-header"><a href="/fed.github.io/javascript/typeofinstanceof.html#instanceof" class="sidebar-link">instanceof</a></li></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Nodejs</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>工具</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="_0-1-0-2-0-3"><a href="#_0-1-0-2-0-3" class="header-anchor">#</a> 0.1+0.2 !=0.3</h1> <p>在 js 中 <code>0.1 + 0.2 != 0.3</code> 而是输出 : 0.30000000000000004 ,这是为什么呢？
+在计算机执行计算的时候，需要把十进制转换成二进制，执行计算，计算完成后输出。
+我们分析一下 0.1 的二进制， 0 是整数位，1 是小数位。</p> <p>整数转换二级制的流程:</p> <p>当前位值 * 2^(n-1)
+1010 = 1* 2^3 +0*2^2 +1<em>2^1+0</em>2^0 = 10</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">parseInt</span><span class="token punctuation">(</span><span class="token string">'1010'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 10</span>
+</code></pre></div><p>小数部分转二级制流程:
+把当前位不停*2 取整
+0.1 转换成二进制
+0.1 * 2 = 0.2 无整数 二进制为:0.0
+0.2 * 2 = 0.4 无整数 二进制为:0.00
+0.4 * 2 = 0.8 无整数 二进制为:0.000
+0.8 * 2 = 0.6 取 1 余 0.6 二进制为:0.0001
+0.6 * 2 = 0.2 取 1 余 0.2 二进制为:0.00011
+0.2 * 2 = 0.4 无整数 二进制为:0.000110
+无限循环....
+所有 0.1 转换二进制是无限循环的：0.00110011001100110011....
+在计算机取值双精度浮点数（可以理解为四舍五入）取值为如下：</p> <p>0.0001100110011001100110011001100110011001100110011001101</p> <p>同理 0.2 转成二级制是</p> <p>0.001100110011001100110011001100110011001100110011001101</p> <p>0.1 + 0.2 的二级制 相加得到二级制结果是：
+0.0100110011001100110011001100110011001100110011001100111
+输出 十进制：</p> <p>parseInt('0.0100110110010100110011001100110011001100110011001100111', 2); 这个不支持小数
+可以使用这个网站校验： https://tool.oschina.net/hexconvert/
+输出： 0.30000000000000004</p> <p>所有 0.1+ 0.2 ！=0.3</p> <p>转换成二级制可以通过 实现
+(0.1).toString(2)
+(0.2).toString(2)</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/fed.github.io/javascript/call.html" class="prev">
+        call,apply,bind,new 的实现原理
+      </a></span> <span class="next"><a href="/fed.github.io/javascript/typeofinstanceof.html">
+        typeof &amp; instanceof 区别
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/fed.github.io/assets/js/app.972fd7c1.js" defer></script><script src="/fed.github.io/assets/js/2.7f857163.js" defer></script><script src="/fed.github.io/assets/js/6.66116a90.js" defer></script>
+  </body>
+</html>
